@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HelloApp</title>
+    <title><%= yield(:title) %> | My rails webapp</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,16 @@
   </head>
 
   <body>
+ 	<% tempString = "This is a temporary header and filled with: " %>
+ 	<% if content_for?(:special) %>
+ 		<h1> <%= tempString + yield(:special) %> </h1>
+ 	<% else %>
+ 		<h1> <%= tempString + "NOTHING" %> </h1>
+ 	<% end %>
+ 	<center>
+ 		<h3> <%= someMethod %> </h3>
+ 		<%= specialHeader(content_for?(:special)) %>
+ 	</center>
     <%= yield %>
   </body>
 </html>
