@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %> | My rails webapp</title>
+    <title><%=  getTitle(yield(:title)) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,16 +9,27 @@
   </head>
 
   <body>
- 	<% tempString = "This is a temporary header and filled with: " %>
- 	<% if content_for?(:special) %>
- 		<h1> <%= tempString + yield(:special) %> </h1>
- 	<% else %>
- 		<h1> <%= tempString + "NOTHING" %> </h1>
- 	<% end %>
- 	<center>
- 		<h3> <%= someMethod %> </h3>
- 		<%= specialHeader(content_for?(:special)) %>
- 	</center>
-    <%= yield %>
+  	<font color = "white">
+	  	<header class="navbar navbar-fixed-top navbar-inverse">
+	  		<div class = "container">
+			 	<nav>
+			 		<ul class = "nav navbar-nav navbar-left">
+					 	<li> <%= link_to "User list", '/' %> </li>
+					 	<li> <%= link_to "Home", '/static_pages/home' %> </li>
+					 	<li> <%= link_to "Help", '/static_pages/help' %> </li>
+			 		</ul>
+			 	</nav>
+			</div>
+		</header>
+	</font>
+	<center>
+		<h1> <%= tempHeader(yield(:special)) %> </h1>
+		<h3> <%= someMethod %> </h3>
+		<%= specialHeader(content_for?(:special)) %>
+	</center>
+	<div class = "container">
+		<%= yield %>
+		<%= render 'layouts/footer' %>
+	</div>
   </body>
 </html>
